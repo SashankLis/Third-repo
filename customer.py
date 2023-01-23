@@ -17,33 +17,33 @@ def customer_load():
 
     #Load tmp table customer
 
-    # load_tmp_customer = '''
-    #             INSERT INTO BHATBHATENI.SASHANK_TMP.TMP_CUSTOMER(
-    #             CUSTOMER_ID,CUSTOMER_FST_NM,
-    #             CUSTOMER_MID_NM,CUSTOMER_LST_NM,
-    #             CUSTOMER_ADDR
-    #             )
-    #             SELECT ID,CUSTOMER_FIRST_NAME,CUSTOMER_MIDDLE_NAME,
-    #             CUSTOMER_LAST_NAME,CUSTOMER_ADDRESS
-    #             FROM BHATBHATENI.SASHANK_STG.STG_CUSTOMER;
-    #        '''
-    #
-    # sf.execute_query(load_tmp_customer)
+    load_tmp_customer = '''
+                INSERT INTO BHATBHATENI.SASHANK_TMP.TMP_CUSTOMER(
+                CUSTOMER_ID,CUSTOMER_FST_NM,
+                CUSTOMER_MID_NM,CUSTOMER_LST_NM,
+                CUSTOMER_ADDR
+                )
+                SELECT ID,CUSTOMER_FIRST_NAME,CUSTOMER_MIDDLE_NAME,
+                CUSTOMER_LAST_NAME,CUSTOMER_ADDRESS
+                FROM BHATBHATENI.SASHANK_STG.STG_CUSTOMER;
+           '''
+    
+    sf.execute_query(load_tmp_customer)
 
     #Load data to target table customer
 
-    # load_tgt_customer = '''
-    #                    INSERT INTO BHATBHATENI.SASHANK_TGT.TGT_CUSTOMER(
-    #                    CUSTOMER_KY,CUSTOMER_ID,CUSTOMER_FST_NM,CUSTOMER_MID_NM,
-    #                    CUSTOMER_LST_NM,CUSTOMER_ADDR,OPEN_CLOSE_CD,ROW_INSRT_TMS,
-    #                    ROW_UPDT_TMS
-    #                    )
-    #                    SELECT CUSTOMER_KY,CUSTOMER_ID,CUSTOMER_FST_NM,CUSTOMER_MID_NM,CUSTOMER_LST_NM,CUSTOMER_ADDR,
-    #                    1,LOCALTIMESTAMP,LOCALTIMESTAMP
-    #                    FROM BHATBHATENI.SASHANK_TMP.TMP_CUSTOMER
-    #                    WHERE CUSTOMER_ID NOT IN (SELECT DISTINCT CUSTOMER_ID FROM BHATBHATENI.SASHANK_TGT.TGT_CUSTOMER);
-    #                     '''
-    # sf.execute_query(load_tgt_customer)
+    load_tgt_customer = '''
+                       INSERT INTO BHATBHATENI.SASHANK_TGT.TGT_CUSTOMER(
+                       CUSTOMER_KY,CUSTOMER_ID,CUSTOMER_FST_NM,CUSTOMER_MID_NM,
+                       CUSTOMER_LST_NM,CUSTOMER_ADDR,OPEN_CLOSE_CD,ROW_INSRT_TMS,
+                       ROW_UPDT_TMS
+                       )
+                       SELECT CUSTOMER_KY,CUSTOMER_ID,CUSTOMER_FST_NM,CUSTOMER_MID_NM,CUSTOMER_LST_NM,CUSTOMER_ADDR,
+                       1,LOCALTIMESTAMP,LOCALTIMESTAMP
+                       FROM BHATBHATENI.SASHANK_TMP.TMP_CUSTOMER
+                       WHERE CUSTOMER_ID NOT IN (SELECT DISTINCT CUSTOMER_ID FROM BHATBHATENI.SASHANK_TGT.TGT_CUSTOMER);
+                        '''
+    sf.execute_query(load_tgt_customer)
 
     # Update target table customer
 
