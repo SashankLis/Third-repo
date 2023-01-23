@@ -5,14 +5,14 @@ def customer_load():
 
     #Customer
 
-    #Truncate temp table customer
+    Truncate temp table customer
 
-    # truncate_tmp_customer = '''
-    #                                   TRUNCATE TABLE BHATBHATENI.SASHANK_TMP.TMP_CUSTOMER
-    #
-    #                                    '''
-    #
-    # sf.execute_query(truncate_tmp_customer)
+    truncate_tmp_customer = '''
+                                      TRUNCATE TABLE BHATBHATENI.SASHANK_TMP.TMP_CUSTOMER
+    
+                                       '''
+    
+    sf.execute_query(truncate_tmp_customer)
 
 
     #Load tmp table customer
